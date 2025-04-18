@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Put this in <head> -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <title>TL Dashboard</title>
+  <style>
+    .roster-table th,
+    .roster-table td {
+      font-size: 0.7rem;
+      text-align: center;
+      vertical-align: middle;
+      min-width: 30px;
+      padding: 4px;
+    }
+
+    .modal-lg {
+      max-width: 95%;
+    }
+
+    .table-responsive {
+      max-height: 500px;
+      overflow: auto;
+    }
+
+    thead th {
+      background-color: #ffc107;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .shift-A {
+      background-color: #a5cbf5 !important;
+      ;
+      color: rgb(3, 3, 3);
+    }
+
+    .shift-G {
+      background-color: #69e485 !important;
+      ;
+      color: rgb(7, 7, 7);
+    }
+
+    .shift-G1 {
+      background-color: #face48 !important;
+      ;
+      color: black;
+    }
+
+    .shift-B {
+      background-color: #f78809 !important;
+      ;
+      color: rgb(19, 18, 18);
+    }
+
+    .shift-OFF {
+      background-color: #dc3545 !important;
+      ;
+      color: rgb(17, 17, 17);
+    }
+
+    .roster-title {
+      background-color: rgb(245, 164, 191) !important;
+      ;
+      color: rgb(22, 22, 22);
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <h4>TL Dashboard</h4>
+      <!-- <div class="container"> -->
+      <div class="container row">
+        <div class="col-10"></div>
+        <div class="col">
+          <!-- <button type="button" class="btn btn-dark logout">Logout</button> -->
+          <i class="bi bi-box-arrow-right"></i>
+        </div>
+        <div class="col">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div class="offcanvas offcanvas-start data w-25" id="offcanvasNavbar">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active open-modal-link" aria-current="page" href="#"
+                data-bs-target="#exampleModal">Modify Engineer</a>
+            </li>
+            <!-- <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Update Engineer</a>
+                  </li> -->
+            <li class="nav-item">
+              <a class="nav-link active open-modal-link" aria-current="page" href="#"
+                data-bs-target="#removeModal">Remove Engineer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active open-modal-link" aria-current="page" href="#" data-bs-target="#viewModal">View
+                Engineers</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div style="background-image: url('back.png');"><!--View Roster-->
+    <div class="container-fluid">
+      <button class="btn btn-primary float-end m-3" data-bs-toggle="modal" data-bs-target="#rosterModal">View
+        Roster</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="rosterModal" tabindex="-1" aria-labelledby="rosterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">August Month Roster 2024</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table table-bordered roster-table">
+                  <thead>
+                    <tr>
+                      <th class="roster-title" colspan="33">August Month Roster 2024</th>
+                    </tr>
+                    <tr>
+                      <th>OLMS ID</th>
+                      <th>Employee Name</th>
+                      <th>1</th>
+                      <th>2</th>
+                      <th>3</th>
+                      <th>4</th>
+                      <th>5</th>
+                      <th>6</th>
+                      <th>7</th>
+                      <th>8</th>
+                      <th>9</th>
+                      <th>10</th>
+                      <th>11</th>
+                      <th>12</th>
+                      <th>13</th>
+                      <th>14</th>
+                      <th>15</th>
+                      <th>16</th>
+                      <th>17</th>
+                      <th>18</th>
+                      <th>19</th>
+                      <th>20</th>
+                      <th>21</th>
+                      <th>22</th>
+                      <th>23</th>
+                      <th>24</th>
+                      <th>25</th>
+                      <th>26</th>
+                      <th>27</th>
+                      <th>28</th>
+                      <th>29</th>
+                      <th>30</th>
+                      <th>31</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>A1A4KQ7B</td>
+                      <td>Priyashu Sharma</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G1</td>
+                      <td class="shift-G">G1</td>
+                      <td class="shift-G">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                    </tr>
+                    <tr>
+                      <td>A1A4KQ7B</td>
+                      <td>Hardik Patel</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                    </tr>
+                    <tr>
+                      <td>A1G1X1Z1</td>
+                      <td>Neha Gupta</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-A">A</td>
+                    </tr>
+                    <tr>
+                      <td>B2K2M2Y2</td>
+                      <td>Priya Sen</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                    </tr>
+                    <tr>
+                      <td>C3P3N3X3</td>
+                      <td>Rohan Verma</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">B</td>
+                      <td class="shift-G1">B</td>
+                    </tr>
+                    <tr>
+                      <td>D4T4Q4L4</td>
+                      <td>Aryan Singh</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G1">G1</td>
+                    </tr>
+                    <tr>
+                      <td>E5U5R5M5</td>
+                      <td>Samar Das</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                    </tr>
+                    <tr>
+                      <td>F6V6S6N6</td>
+                      <td>Imran Khan</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-OFF">OFF</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-B">B</td>
+                      <td class="shift-G">G</td>
+                      <td class="shift-A">A</td>
+                      <td class="shift-G1">G1</td>
+                      <td class="shift-OFF">OFF</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">A</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">G</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">G1</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">B</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>3</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>4</td>
+                      <td>2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL MODIFY-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modify Engineer</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="" class="form-label">OLM Id</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 mt-5">
+                  <button class="btn btn-outline-info" type="submit">Search</button>
+                </div>
+              </form>
+
+              <div class="modal-footer mt-2">
+                <form class="row g-3">
+                  <div class="col-md-6">
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">OLM ID</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">Email</label>
+                    <input type="email" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">Contact</label>
+                    <input type="number" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">LOB</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">Team</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-info">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL REMOVE -->
+      <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="removeModalLabel">Remove Engineer</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="" class="form-label">OLM Id</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 mt-5">
+                  <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </div>
+              </form>
+            </div>
+            <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL VIEW -->
+      <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="viewModalLabel">Engineer Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body overflow-scroll h-25">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="" class="form-label">OLM Id</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 mt-5">
+                  <button class="btn btn-outline-info" type="submit">Search</button>
+                </div>
+                <span class="border-bottom"></span>
+              </form>
+
+
+              <div class="h-75 overflow-auto">
+                <table class="table mt-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">OLM Id</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">LOB</th>
+                      <th scope="col">Team</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>A14K2Q7B</td>
+                      <td>Priyanshi Sharma</td>
+                      <td>priyanshi@airtel.com</td>
+                      <td>7634218</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>A1WD74L2</td>
+                      <td>Harshwardhan</td>
+                      <td>harshwardhan@airtel.com</td>
+                      <td>65429876</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>A17QEPLP</td>
+                      <td>Saurabh Shukla</td>
+                      <td>saurabh@airtel.com</td>
+                      <td>743098266</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>A19K4NOF</td>
+                      <td>Vipin Rohilla</td>
+                      <td>vipin@airtel.com</td>
+                      <td>762053829</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>A1O5RJP9</td>
+                      <td>Harpal Singh</td>
+                      <td>harpal@airtel.com</td>
+                      <td>8923087</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>A1KOY1LY</td>
+                      <td>Ravi Kumar</td>
+                      <td>ravi@airtel.com</td>
+                      <td>754902364</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">7</th>
+                      <td>A1APL5AE</td>
+                      <td>Manish Sharma</td>
+                      <td>manish@airtel.com</td>
+                      <td>74962529</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">8</th>
+                      <td>A10TX94G</td>
+                      <td>Ajay Pal</td>
+                      <td>ajay@airtel.com</td>
+                      <td>87354028</td>
+                      <td>GB</td>
+                      <td>CC</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+
+      <script>
+        // document.addEventListener("DOMContentLoaded", function(){
+        //     let offcanvasElement = document.getElementById("offcanvasNavbar");
+        //     let offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
+
+        //     document.getElementById("openModalLink").addEventListener("click", function(event){
+        //         event.preventDefault();
+        //         offcanvasInstance.hide();
+        //         offcanvasElement.addEventListener("hidden.bs.offcanvas", function(){
+        //             let modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+        //             modal.show();
+        //         }, {once: true});
+        //     });
+        // });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          
+          let offcanvasElement = document.getElementById("offcanvasNavbar");
+          let offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
+
+          document.querySelectorAll(".open-modal-link").forEach(link => {
+            link.addEventListener("click", function (event) {
+              event.preventDefault();
+
+              let targetModalId = this.getAttribute("data-bs-target");
+              console.log(targetModalId);
+              offcanvasInstance.hide();
+
+              offcanvasElement.addEventListener("hidden.bs.offcanvas", function () {
+                let modal = new bootstrap.Modal(document.querySelector(targetModalId));
+                console.log(modal);
+                modal.show();
+              }, { once: true });
+            });
+          });
+         
+        });
+
+      </script>
+</body>
+
+</html>

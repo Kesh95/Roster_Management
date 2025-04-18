@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Roster Management</title>
+    <style>
+        .roster-table th,
+        .roster-table td {
+            font-size: 0.7rem;
+            text-align: center;
+            vertical-align: middle;
+            min-width: 30px;
+            padding: 4px;
+        }
+
+        .modal-lg {
+            max-width: 95%;
+        }
+
+        .table-responsive {
+            max-height: 500px;
+            overflow: auto;
+        }
+
+        thead th {
+            background-color: #ffc107;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .shift-A {
+            background-color: #a5cbf5 !important;
+            ;
+            color: rgb(3, 3, 3);
+        }
+
+        .shift-G {
+            background-color: #69e485 !important;
+            ;
+            color: rgb(7, 7, 7);
+        }
+
+        .shift-G1 {
+            background-color: #face48 !important;
+            ;
+            color: black;
+        }
+
+        .shift-B {
+            background-color: #f78809 !important;
+            ;
+            color: rgb(19, 18, 18);
+        }
+
+        .shift-OFF {
+            background-color: #dc3545 !important;
+            ;
+            color: rgb(17, 17, 17);
+        }
+
+        .roster-title {
+            background-color: rgb(245, 164, 191) !important;
+            ;
+            color: rgb(22, 22, 22);
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+        <div class="input-box">
+            <input type="password" placeholder="Password" required>
+            <i class='bx bx-hide eye-icon'></i>
+        </div>
+        
+        <div class="input-box">
+            <input type="password" placeholder="Confirm Password" required>
+            <i class='bx bx-hide eye-icon'></i>
+        </div>
+          <script>
+document.querySelectorAll('.eye-icon').forEach(function(icon) {
+    icon.addEventListener('click', function () {
+        const input = this.previousElementSibling;
+
+        if (input.type === "password") {
+            input.type = "text";
+            this.classList.remove("bx-hide");
+            this.classList.add("bx-show");
+        } else {
+            input.type = "password";
+            this.classList.remove("bx-show");
+            this.classList.add("bx-hide");
+        }
+    });
+});
+</script>
+
+                    
+</body>
+
+</html>
