@@ -5,17 +5,17 @@ exports.getUserByOlmId = async (olmid) => {
   const query = 'SELECT * FROM signup WHERE olmid = ?';
   
   try {
-    const [results] = await db.execute(query, [olmid]); // Use db.execute for the query
-    console.log("Database query results:", results);  // Log query result
+    const [results] = await db.execute(query, [olmid]); 
+    console.log("Database query results:", results);
 
     if (results.length === 0) {
-      return null;  // No user found
+      return null;
     }
 
-    return results[0];  // Return the first user
+    return results[0]; 
   } catch (err) {
-    console.error("Database Error:", err);  // Log DB error
-    throw err;  // Rethrow the error
+    console.error("Database Error:", err); 
+    throw err; 
   }
 };
 
