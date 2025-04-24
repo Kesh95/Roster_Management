@@ -23,8 +23,10 @@ exports.login = async (req, res) => {
     console.log("User role is:", user.role);
 
     if (user.role === 'TL') {
+      req.session.olmid = user.olmid;
       return res.status(200).json({ redirect: '/TLdashboard' });
     } else if (user.role === 'Eng') {
+      req.session.olmid = user.olmid;
       return res.status(200).json({ redirect: '/EngDashboard' });
     } else {
       return res.status(400).json({ message: 'Invalid role!' });

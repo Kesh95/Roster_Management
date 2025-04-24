@@ -1,24 +1,21 @@
-const TLModel = require('../models/TLmodels');
+const TLModel = require("../models/TLmodels");
 
-const fetchUser = (req, res) => {
-    const olmid = req.params.olmid;
-    console.log('Searching for OLM ID:', olmid); // Log the incoming OLM ID
+exports.searchUser = async (req, res) => {
+    const olmid = req.params.olmid.trim();
+    console.log(`Searching for OLM ID: ${olmid}`); // ✅ Debugging log
   
-    TLModel.getUserByOlm(olmid, (err, result) => {
-      if (err) {
-        console.error('Error fetching user:', err); // Log any error during the DB query
-        return res.status(500).send('Server error');
-      }
-      console.log("Raw DB result:", result); 
-
-      if (result.length === 0) {
-        console.log('User not found for OLM ID:', olmid); // Log if no user is found
-        return res.status(404).send('User not found');
-      }
+    try {
+      const result = await TLModel.findUserByOlmId(olmid);
+      console.log("DB Result:", result); // ✅ Debugging log
   
-      console.log('User found:', result[0]); 
-      res.json(result[0]);
-    });
+      if (result.length > 0) {
+        res.json({ success: true, user: result[0] });
+      } else {
+        res.json({ success: false, message: "User not found" });
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
   };
   
-module.exports = { fetchUser };

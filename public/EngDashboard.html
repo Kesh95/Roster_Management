@@ -81,7 +81,10 @@
           color: #333;
         }
     
-       
+       .modal-body{
+        max-height: 50vh;
+        overflow-y: auto;
+       }
 
     </style>
 </head>
@@ -95,18 +98,20 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a class="navbar-brand" href="#">Engineer Dashboard</a>
+                  <span id="navbarOlmid" class="ms-3 fw-bold text-primary"></span>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link "  href="#" data-bs-toggle="modal" data-bs-target="#viewrostermodal">View Roster</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#viewrostermodal">View Roster</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#applyleavemodal">Apply Leave</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#viewdetails">View Personal Details</a>
+                  </li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <button class="btn btn-outline-secondary" type="submit"> <i class='bx bx-log-out'></i>Logout</button>
-                 
-                </form>
+                <button onclick="window.location.href='login.html'" class="btn btn-secondary">Logout</button>
+
               </div>
             </div>
           </nav>
@@ -121,10 +126,32 @@
            
 
     </div>
+    <!--MODALS-->
+    <!--1.view engineer details modal-->
+    <div class="modal fade" id="viewdetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" style="position:absolute; top:60px; right:30px; margin:0;" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalclose"></button>
+          </div>
+          <div class="modal-body data-modal">
+            <p><strong>Name:</strong></p>
+            <p><strong>OLM ID:</strong></p>
+            <p><strong>Contact Number:</strong></p>
+            <p><strong>LOB:</strong></p>
+            <p><strong>Team:</strong></p>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
 
-      
 
-    <!--view roster modal-->
+    <!--2. view roster modal-->
     <div class="modal fade" id="viewrostermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -193,7 +220,7 @@
       </div>
     </div>
 
-    <!--apply leave modal-->
+    <!--3. apply leave modal-->
     <div class="modal fade" id="applyleavemodal" tabindex="-1" aria-labelledby="exampleModalLabel" >
       <div class="modal-dialog">
         <div class="modal-content">
@@ -269,7 +296,11 @@
           const options = {year: 'numeric', month:'long',day:'numeric'};
           document.getElementById('current-date').innerText=`Today is ${today.toLocaleDateString(undefined,options)}`;
 
+
         
-    </script>   
+    </script>
+  <script src="js/Engdashboard.js"></script>
+   
+    
 </body>
 </html>
