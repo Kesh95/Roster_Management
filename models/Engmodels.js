@@ -8,29 +8,33 @@ exports.getDetailsByOlmid = (olmid) => {
     });
   });
 };
-// exports.findByOlmid = (olmid) => {
-//   return new Promise((resolve, reject) => {
-//     console.log('Model: findByOlmid - START - Searching for OLM ID:', olmid);
-//     db.query('SELECT username, olmid, contact_no, lob, team FROM signup WHERE olmid = ?', [olmid], (err, results) => {
-//       console.log('Model: findByOlmid - CALLBACK');
-//       if (err) {
-//         console.error('Model: findByOlmid - ERROR:', err);
-//         return reject(err);
-//       }
-//       console.log('Model: findByOlmid - RESULTS:', results);
-//       resolve(results[0]);
-//     });
-//   });
-// };
 
 exports.findByOlmid = async (olmid) => {
   try {
     const [results] = await db.execute('SELECT username, olmid, contact_no, lob, team FROM signup WHERE olmid = ?', [olmid]);
     if (results.length > 0) {
-      return results[0]; // Return the first row if found
+      return results[0];
     } else {
-      return null; // Or throw an error:  throw new Error('User not found');
+      return null;
     }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+exports.addleaveUser=async (user) =>{
+  const {olmid,startdate,enddate,reason} = user;
+  const status = 'pending'; 
+  const query = `
+    INSERT INTO leavedata
+    (olmid,startdate,enddate,reason,status) 
+    VALUES (?, ?, ?, ?, ?)
+  `;
+  try {
+    const [result] = await db.execute(query, [
+      olmid,startdate,enddate,reason,status
+    ]);
+    return result;
   } catch (err) {
     console.error(err);
     throw err;

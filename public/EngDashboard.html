@@ -233,22 +233,21 @@
               <form id="leave-form">
                 <div class="input-box">
                   <label for="start-date">Start Date:</label>
-                  <input type="date" id="start-date" name="start-date" required>
+                  <input type="date" id="startdate" name="startdate" required>
                 </div>
                 <div class="input-box">
                   <label for="end-date">End Date:</label>
-                  <input type="date" id="end-date" name="end-date" required>
+                  <input type="date" id="enddate" name="enddate" required>
                 </div>
                 <div class="input-box">
                   <label for="reason">Reason for Leave:</label>
-                  <textarea id="reason" rows="3" placeholder="Enter your reason..." required></textarea>
-                </div>
-                        
+                  <textarea id="reason" name="reason" rows="3" placeholder="Enter your reason..." required></textarea>
+                </div>      
               </form>
                 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="applyleave()">Submit Leave</button>
+            <button type="button" id="submitleave" name="submitleave" class="btn btn-primary">Submit Leave</button>
             <!-- <button type="button" class="btn btn-secondary">Close</button> -->
           </div>
         </div>
@@ -257,39 +256,39 @@
         
 
     <script>
-        function applyleave(){
-            const start = document.getElementById("start-date").value;
-            const end = document.getElementById("end-date").value;
-            const reason = document.getElementById("reason").value;
+        // function applyleave(){
+        //     const start = document.getElementById("start-date").value;
+        //     const end = document.getElementById("end-date").value;
+        //     const reason = document.getElementById("reason").value;
 
-            //adding a check where end date can not be choosen before start date
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            if(endDate < startDate){
-                alert("Error: End date cannot be before start date");
-                return;
-            }
-            if(!start || !end || !reason){
-                alert("Please fill")
-                return;
-            }
+        //     //adding a check where end date can not be choosen before start date
+        //     const startDate = new Date(start);
+        //     const endDate = new Date(end);
+        //     if(endDate < startDate){
+        //         alert("Error: End date cannot be before start date");
+        //         return;
+        //     }
+        //     if(!start || !end || !reason){
+        //         alert("Please fill")
+        //         return;
+        //     }
 
-            alert(`LEAVE APPLIED SUCCESSFULLY! \n\nFrom: ${start}\nTo: ${end}\nReason: ${reason}`);
-            console.log("hello")
+        //     alert(`LEAVE APPLIED SUCCESSFULLY! \n\nFrom: ${start}\nTo: ${end}\nReason: ${reason}`);
+        //     console.log("hello")
 
-            //clearing modal inputs after submitting
-            // start.value = "";
-            // end.value = "";
-            // reason.value=""
+        //     //clearing modal inputs after submitting
+        //     // start.value = "";
+        //     // end.value = "";
+        //     // reason.value=""
            
 
-            //close modal after submission
-            const modal = bootstrap.Modal.getInstance(document.getElementById("applyleavemodal"));
-            modal.hide();
-            start.value = "";
-            end.value = "";
-            reason.value=""
-          }
+        //     //close modal after submission
+        //     const modal = bootstrap.Modal.getInstance(document.getElementById("applyleavemodal"));
+        //     modal.hide();
+        //     start.value = "";
+        //     end.value = "";
+        //     reason.value=""
+        //   }
 
           //js for updating date format daily
           const today = new Date();

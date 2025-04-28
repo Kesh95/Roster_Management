@@ -2,12 +2,10 @@ const TLModel = require("../models/TLmodels");
 
 exports.searchUser = async (req, res) => {
     const olmid = req.params.olmid.trim();
-    console.log(`Searching for OLM ID: ${olmid}`); // ✅ Debugging log
-  
+    console.log(`Searching for OLM ID: ${olmid}`); 
     try {
       const result = await TLModel.findUserByOlmId(olmid);
-      console.log("DB Result:", result); // ✅ Debugging log
-  
+      console.log("DB Result:", result); 
       if (result.length > 0) {
         res.json({ success: true, user: result[0] });
       } else {

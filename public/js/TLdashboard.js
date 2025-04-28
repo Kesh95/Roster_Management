@@ -1,17 +1,16 @@
 console.log("Script loaded!");
 
 document.addEventListener("DOMContentLoaded", async function () {
-  //Fetch OLM ID from session and update navbar
   try {
-    const res = await fetch('/getLoggedInOlmId');
-    const data = await res.json();
-    console.log(data);
-    document.getElementById('navbarOlmid').innerHTML = data.olmId; // Display OLM ID in navbar
+    const resSession = await fetch('/tl/getLoggedInOlmId');
+    const sessionData = await resSession.json();
+    console.log('Seession',sessionData);
+    document.getElementById('navbarOlmid').innerText = sessionData.olmid;
+
   } catch (err) {
     console.error("Error fetching session OLM ID:", err);
   }
 
-  //Handle modal open from offcanvas menu
   let offcanvasElement = document.getElementById("offcanvasNavbar");
   let offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
 

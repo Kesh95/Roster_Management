@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const olmId = sessionData.olmId;
     if (olmId) {
-      console.log("Type of fetch:", typeof fetch); // Add this line
+      console.log("Type of fetch:", typeof fetch); 
 
       fetch(`/eng/search-user/${olmId}`)
         .then(res => {
-          if (!res.ok) { // Check if the response status is not OK (e.g., 404)
+          if (!res.ok) {
             if (res.status === 404) {
               alert("User not found.");
             } else {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
           return res.json();
         })
-        .then(user => { // The resolved data is now the user object directly
+        .then(user => {
           console.log("User data:", user);
           const modalBody = document.querySelector("#viewdetails .data-modal");
           modalBody.innerHTML = `
@@ -37,4 +37,66 @@ document.addEventListener("DOMContentLoaded", async function () {
   } catch (err) {
     console.error("Error fetching session OLM ID:", err);
   }
+  const submitbtn = document.getElementById('submitleave');
+
+submitbtn.addEventListener('click', async function (e) {
+    e.preventDefault();
+
+    // Get the form element
+    const leaveForm = document.getElementById('leave-form');
+    const formData = new FormData(leaveForm);
+    const data = Object.fromEntries(formData);
+    const olmid = document.getElementById('navbarOlmid').textContent;
+    console.log("Form Data:", data); 
+
+    // Check if all fields are filled before continuing
+    if (!data.startdate || !data.enddate || !data.reason) {
+        alert("All fields are required!");
+        return;
+    }
+
+    if (new Date(data.enddate) < new Date(data.startdate)) {
+        alert("Error: End date cannot be before start date");
+        return;
+    }
+    const leaveData = {
+        olmid:olmid,
+        startdate: data.startdate,
+        enddate: data.enddate,
+        reason: data.reason,
+    };
+
+    console.log("Leave Data to Send:", leaveData);
+
+    try {
+        const response = await fetch(`/eng/leavedata`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leaveData),
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            alert(`Error submitting leave: ${errorMessage}`);
+            return;
+        }
+
+        const result = await response.json();
+        alert(result.message);
+
+        // Optionally close the modal after successful submission
+        const modalCloseButton = document.getElementById('modalclose');
+        if (modalCloseButton) {
+            modalCloseButton.click();
+        }
+        // Optionally reset the form
+        leaveForm.reset();
+
+    } catch (error) {
+        console.error("There was an error submitting the leave:", error);
+        alert("An error occurred while submitting your leave. Please try again later.");
+    }
+});
 });
