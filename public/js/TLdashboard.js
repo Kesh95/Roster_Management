@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const resSession = await fetch('/tl/getLoggedInOlmId');
     const sessionData = await resSession.json();
-    console.log('Seession',sessionData);
-    document.getElementById('navbarOlmid').innerText = sessionData.olmid;
+    // document.getElementById('navbarOlmid').innerText = sessionData.olmid;
 
   } catch (err) {
     console.error("Error fetching session OLM ID:", err);
@@ -28,87 +27,117 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   });
 
-  const searchButton = document.getElementById("searchBtn");
-    if (searchButton) {
-        console.log("Search button element found.");
-        searchButton.addEventListener("click", function () {
-            const olmidInput = document.getElementById("modifyolmsearch");
-            if (olmidInput) {
-                const olmid = olmidInput.value.trim();
-                console.log("Search button clicked. OLM ID to search:", olmid); // <--- ADD THIS LOG
-
-                if (!olmid) {
-                    alert("Please enter an OLM ID.");
-                    return;
-                }
-
-                fetch(`/tl/search-user/${olmid}`)
-                    .then(response => {
-                        console.log("Fetch request initiated."); // <--- ADD THIS LOG
-                        if (!response.ok) {
-                            throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log("Search Response Data:", data);
-                        if (data && data.success && data.user) {
-                            document.getElementById("modifyname").value = data.user.username || '';
-                            document.getElementById("modifyolm").value = data.user.olmid || '';
-                            document.getElementById("modifycontact").value = data.user.contact_no || '';
-                            document.getElementById("modifypass").value = data.user.pass || '';
-                            // ... (set other fields) ...
-                        } else {
-                            alert("User not found!");
-                            // ... (clear fields) ...
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error fetching user:", error);
-                        alert("Something went wrong while searching for the user.");
-                        // ... (clear fields) ...
-                    });
-            } else {
-                console.error("Input field 'modifyolmsearch' not found!");
-            }
-        });
-    } else {
-        console.error("Search button with ID 'searchBtn' not found!");
+  document.getElementById('searchBtn').addEventListener('click', async function () {
+    const olmid = document.getElementById('modifyolmsearch').value.trim();
+    
+    if (!olmid) {
+      alert('Please enter an OLM ID to search.');
+      return;
     }
-  //Modify Modal
-  // document.getElementById("searchBtn").addEventListener("click", function () {
-  //   const olmid = document.getElementById("modifyolmsearch").value;
+  
+    try {
+      const response = await fetch(`/tl/search-user/${olmid}`);
+      const data = await response.json();
+      const users=data[0];
+      if (response.ok) {
+        document.getElementById('modifyname').value = users.username || '';
+        document.getElementById('modifyolm').value = users.olmid || '';
+        document.getElementById('modifycontact').value = users.contact_no || '';
+        document.getElementById('modifygender').value = users.gender || '';
+        document.getElementById('teamDropdown').value = users.team || '';
+        document.getElementById('roledropdown').value = users.role || '';
+        document.getElementById('modifypass').value = users.pass || '';
 
-  //   if (!olmid) {
-  //     alert("Please enter an OLM ID.");
-  //     return;
-  //   }
-
-  //   fetch(`/tl/search-user/${olmid}`)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok ' + response.statusText);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       console.log("Response Data:", data);
-  //       if (data.success && data.user) {
-  //         document.getElementById("modifyname").value = data.user.username;
-  //         document.getElementById("modifyolm").value = data.user.olmid;
-  //         document.getElementById("modifycontact").value = data.user.contact_no;
-  //         // document.getElementById("modifygender").value = data.user.gender;
-  //         // document.getElementById("lobbtn").value = data.user.lob;
-  //         // document.getElementById("teambtn").value = data.user.team;
-  //         // document.getElementById("roledropdown").value = data.user.role;
-  //         document.getElementById("modifypass").value = data.user.pass;
-  //       } else {
-  //         alert("User not found!");
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error("Error fetching user:", error);
-  //       alert("Something went wrong.");
-  //     });
-  // });
+  
+  
+      } else {
+        alert(data.message || 'User not found.');
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      alert('Something went wrong. Please try again.');
+    }
+  });
+  
+  document.getElementById('searchfordelete').addEventListener('click', async function (e) {
+    e.preventDefault(); // Prevent form from reloading
+  
+    const olmid = document.getElementById('removeolm').value.trim();
+    if (!olmid) {
+      alert('Please enter an OLM ID.');
+      return;
+    }
+  
+    try {
+      const response = await fetch(`/tl/search-user/${olmid}`);
+      const data = await response.json();
+      const user = data[0];
+  
+      if (response.ok && user) {
+        document.getElementById('deletename').value = user.username || '';
+        document.getElementById('deleteolm').value = user.olmid || '';
+      } else {
+        alert(data.message || 'User not found.');
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      alert('Something went wrong while searching.');
+    }
+  });
+  
+document.getElementById('deleteBtn').addEventListener('click', async function (e) {
+    e.preventDefault();
+    const olmid = document.getElementById('removeolm').value.trim();
+    if (!olmid) {
+      alert('Please enter an OLM ID before deleting.');
+      return;
+    }
+  
+    if (!confirm('Are you sure you want to set status to resign?')) return;
+  
+    try {
+      const response = await fetch(`/tl/remove-user/${olmid}`, {
+        method: 'PUT'
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        alert('User status updated to resign.');
+      } else {
+        alert(result.message || 'Failed to update status.');
+      }
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert('Something went wrong during deletion.');
+    }
+  });
+  
+  document.getElementById('viewModal').addEventListener('show.bs.modal', async function () {
+    try {
+      const response = await fetch('/tl/all-engineers');
+      const engineers = await response.json();
+  
+      const tbody = document.querySelector('#viewModal tbody');
+      tbody.innerHTML = ''; // clear existing rows
+  
+      engineers.forEach((eng, index) => {
+        const row = `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${eng.olmid}</td>
+            <td>${eng.username}</td>
+            <td>${eng.gender}</td>
+            <td>${eng.contact_no}</td>
+            <td>${eng.lob}</td>
+            <td>${eng.team}</td>
+          </tr>`;
+        tbody.insertAdjacentHTML('beforeend', row);
+      });
+    } catch (err) {
+      console.error('Error loading engineer data:', err);
+      alert('Failed to load engineer data.');
+    }
+  });
+  
 });

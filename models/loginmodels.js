@@ -6,7 +6,7 @@ exports.getUserByOlmId = async (olmid) => {
   
   try {
     const [results] = await db.execute(query, [olmid]); 
-    console.log("Database query results:", results);
+    console.log("Login Credentials:", results[0]);
 
     if (results.length === 0) {
       return null;

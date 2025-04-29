@@ -10,6 +10,7 @@ router.get('/getLoggedInOlmId', (req, res) => {
     }
   });  
 
-router.get("/search-user/:olmid", TLController.searchUser);
-
+router.get('/search-user/:olmid', TLController.searchEngineerBytl);
+router.put('/remove-user/:olmid', TLController.setUserToResign);
+router.get('/all-engineers', TLController.getAllEngineers);
 module.exports = router;

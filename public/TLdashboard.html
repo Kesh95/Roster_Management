@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <title>TL Dashboard</title>
 </head>
+
 <body>
   <nav class="navbar" style="background-color: #e3f2fd;">
     <div class="container-fluid">
@@ -69,7 +70,7 @@
       </select>
     </div>
 
-     <div class="dropdowncontainer">
+    <div class="dropdowncontainer">
       <select name="monthdropdown" id="monthdropdown">
         <option disabled selected>Select Month</option>
         <option value="January">January</option>
@@ -92,92 +93,94 @@
   </form>
 
   <!-- MODAL MODIFY-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modify Engineer</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Search Form -->
-        <form class="row g-3 mx-3" id="searchForm" >
-          <div class="col-md-6">
-            <label for="" class="form-label">OLM Id</label>
-            <input type="text" class="form-control" id="modifyolmsearch" name="modifyolmsearch">
-          </div>
-          <div class="col-md-6 mt-5">
-            <button class="btn btn-outline-info" id="searchBtn"  type="button">Search</button>
-          </div>
-
-          <span class="border-top"></span>
-
-          <div class="col-md-6">
-            <label for="" class="form-label">Name</label>
-            <input type="text" id="modifyname" name="modifyname" class="modifyinput">
-          </div>
-          <div class="col-md-6">
-            <label for="" class="form-label">OLM ID</label>
-            <input type="text" class="modifyinput" id="modifyolm" name="modifyolm">
-          </div>
-          <!-- <div class="col-md-6">
-            <label for="" class="form-label">Gender</label>
-            <div>
-              <select name="modifygender" id="modifygender" class="modifyinput">
-                <option disabled selected>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modify Engineer</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Search Form -->
+          <form class="row g-3 mx-3" id="searchForm">
+            <div class="col-md-6">
+              <label for="" class="form-label">OLM Id</label>
+              <input type="text" class="form-control" id="modifyolmsearch" name="modifyolmsearch">
             </div>
-          </div> -->
-          <div class="col-md-6">
-            <label for="" class="form-label">Contact</label>
-            <input type="tel" class="modifyinput" id="modifycontact" name="modifycontact">
-          </div>
-          <!-- <div class="col-md-6">
-            <label for="" class="form-label">LOB</label>
-            <div class="dropdown" id="lobdrop">
-              <input type="text"  id="lobbtn" name="lobbtn" class="dropbtn" value="Select LOB" readonly="readonly" required>
-              <div id="lobDropdown" class="dropdown-content">
-                  <ul class="filterul">
-                      <li class="list-item" value="egb">EGB</li>
-                      <li class="list-item" value="gb">GB</li>
-                      <li class="list-item" value="isp">ISP</li>
-                      <li class="list-item" value="sdwan">SDWAN</li>
-                  </ul>
+            <div class="col-md-6 mt-5">
+              <button class="btn btn-outline-info" id="searchBtn" type="button">Search</button>
+            </div>
+
+            <span class="border-top"></span>
+
+            <div class="col-md-6">
+              <label for="" class="form-label">Name</label>
+              <input type="text" id="modifyname" name="modifyname" class="modifyinput">
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">OLM ID</label>
+              <input type="text" class="modifyinput" id="modifyolm" name="modifyolm">
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">Gender</label>
+              <div>
+                <select name="modifygender" id="modifygender" class="modifyinput">
+                  <option disabled selected>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
               </div>
-          </div>
-          </div> -->
-          <!-- <div class="col-md-6">
-            <label for="" class="form-label">Team</label>
-            <div class="dropdown" id="teamdrop">
-              <input type="text"  id="teambtn" name="teambtn" class="dropbtn" value="Select Team" readonly="readonly" required>
-              <div id="teamDropdown" class="dropdown-content">
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">Contact</label>
+              <input type="tel" class="modifyinput" id="modifycontact" name="modifycontact">
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">LOB</label>
+              <div class="dropdown" id="lobdrop">
+                <input type="text" id="lobbtn" name="lobbtn" class="dropbtn" value="Select LOB" readonly="readonly"
+                  required>
+                <div id="lobDropdown" class="dropdown-content">
+                  <ul class="filterul">
+                    <li class="list-item" value="EGB">EGB</li>
+                    <li class="list-item" value="GB">GB</li>
+                    <li class="list-item" value="ISP">ISP</li>
+                    <li class="list-item" value="SDWAN">SDWAN</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">Team</label>
+              <div class="dropdown" id="teamdrop">
+                <input type="text" id="teambtn" name="teambtn" class="dropbtn" value="Select Team" readonly="readonly"
+                  required>
+                <div id="teamDropdown" class="dropdown-content">
                   <ul id="teamul" class="filterul">
                   </ul>
+                </div>
               </div>
-          </div>
-          </div> -->
-          <!-- <div class="col-md-6">
-            <label for="" class="form-label">Role</label>
-            <div>
-              <select name="roledropdown" id="roledropdown" class="modifyinput">
-                <option disabled selected>Select Role</option>
-                <option value="tl">Team Lead</option>
-                <option value="engineer">Engineer</option>
-              </select>
             </div>
-          </div> -->
-          <div class="col-md-6">
-            <label for="" class="form-label">Password</label>
-            <input type="text" class="modifyinput" id="modifypass" name="modifypass">
-          </div>
-          <button type="submit" id="savedetail" class="btn btn-info">Save</button>
-        </form>
+            <div class="col-md-6">
+              <label for="" class="form-label">Role</label>
+              <div>
+                <select name="roledropdown" id="roledropdown" class="modifyinput">
+                  <option disabled selected>Select Role</option>
+                  <option value="TL">TL</option>
+                  <option value="Engineer">Engineer</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">Password</label>
+              <input type="text" class="modifyinput" id="modifypass" name="modifypass">
+            </div>
+            <button type="submit" id="savedetail" class="btn btn-info">Save</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
   <!-- MODAL REMOVE -->
@@ -196,20 +199,18 @@
             </div>
 
             <div class="col-md-6 mt-5">
-              <button class="btn btn-outline-info" type="submit">Search</button>
+              <button class="btn btn-outline-info" id="searchfordelete" type="submit">Search</button>
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">Name</label>
+              <input type="text" id="deletename" name="deletename" class="deleteinput">
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form-label">OLM ID</label>
+              <input type="text" class="deleteinput" id="deleteolm" name="deleteolm">
             </div>
 
-            <div class="col-md-6">
-              <label for="" class="form-label">Status</label>
-              <div>
-                <select name="statusdropdown" id="statusdropdown">
-                  <option disabled selected>Select Status</option>
-                  <option value="active">Active</option>
-                  <option value="resigned">Resigned</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-info">Save</button>
+            <button type="submit" class="btn btn-info" id="deleteBtn">Delete</button>
           </form>
         </div>
       </div>
@@ -243,85 +244,13 @@
                   <th scope="col">#</th>
                   <th scope="col">OLM Id</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">Gender</th>
                   <th scope="col">Contact</th>
                   <th scope="col">LOB</th>
                   <th scope="col">Team</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>A14K2Q7B</td>
-                  <td>Priyanshi Sharma</td>
-                  <td>priyanshi@airtel.com</td>
-                  <td>7634218</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>A1WD74L2</td>
-                  <td>Harshwardhan</td>
-                  <td>harshwardhan@airtel.com</td>
-                  <td>65429876</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>A17QEPLP</td>
-                  <td>Saurabh Shukla</td>
-                  <td>saurabh@airtel.com</td>
-                  <td>743098266</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>A19K4NOF</td>
-                  <td>Vipin Rohilla</td>
-                  <td>vipin@airtel.com</td>
-                  <td>762053829</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>A1O5RJP9</td>
-                  <td>Harpal Singh</td>
-                  <td>harpal@airtel.com</td>
-                  <td>8923087</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td>A1KOY1LY</td>
-                  <td>Ravi Kumar</td>
-                  <td>ravi@airtel.com</td>
-                  <td>754902364</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">7</th>
-                  <td>A1APL5AE</td>
-                  <td>Manish Sharma</td>
-                  <td>manish@airtel.com</td>
-                  <td>74962529</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
-                <tr>
-                  <th scope="row">8</th>
-                  <td>A10TX94G</td>
-                  <td>Ajay Pal</td>
-                  <td>ajay@airtel.com</td>
-                  <td>87354028</td>
-                  <td>GB</td>
-                  <td>CC</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -513,13 +442,15 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-        <!-- JAVASCRIPT -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-          crossorigin="anonymous"></script>
-
-          <script src="js/TLdashboard.js"></script> 
-        </body>
+<script src="js/TLdashboard.js"></script>
+</body>
 
 </html>
