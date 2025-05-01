@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const resSession = await fetch('/eng/getLoggedInOlmId');
     const sessionData = await resSession.json();
-    document.getElementById('navbarOlmid').innerText = sessionData.olmId;
+    // document.getElementById('navbarOlmid').innerText = sessionData.olmId;
 
     const olmId = sessionData.olmId;
     if (olmId) {
@@ -46,7 +46,10 @@ submitbtn.addEventListener('click', async function (e) {
     const leaveForm = document.getElementById('leave-form');
     const formData = new FormData(leaveForm);
     const data = Object.fromEntries(formData);
-    const olmid = document.getElementById('navbarOlmid').textContent;
+    const resSession = await fetch('/eng/getLoggedInOlmId');
+
+    const sessionData = await resSession.json();
+    const olmId = sessionData.olmId;
     console.log("Form Data:", data); 
 
     // Check if all fields are filled before continuing
@@ -60,7 +63,7 @@ submitbtn.addEventListener('click', async function (e) {
         return;
     }
     const leaveData = {
-        olmid:olmid,
+        olmid:olmId,
         startdate: data.startdate,
         enddate: data.enddate,
         reason: data.reason,

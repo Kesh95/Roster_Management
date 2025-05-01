@@ -1,4 +1,13 @@
 const db = require('../config/db'); 
+exports.getDetailsByOlmid = (olmid) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT olmid FROM signup WHERE olmid = ?', [olmid], (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    });
+  });
+};
+
 exports.getUserByOlmIdforTl = async (olmid) => {
   try {
     const [results] = await db.execute('SELECT * FROM signup WHERE olmid = ?', [olmid]);

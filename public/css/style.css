@@ -101,7 +101,6 @@ select:hover{
 }
 
 #open{
-    /* width: 6vw; */
     height: 5vh;
 }
 
@@ -124,3 +123,9 @@ select:hover{
     background-color: rgb(33, 88, 255);
     color: white;
 }
+
+.view-table{
+    height: 50vh;
+    overflow: auto;
+}
+

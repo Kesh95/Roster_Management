@@ -80,34 +80,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
-        <div class="input-box">
-            <input type="password" placeholder="Password" required>
-            <i class='bx bx-hide eye-icon'></i>
-        </div>
-        
-        <div class="input-box">
-            <input type="password" placeholder="Confirm Password" required>
-            <i class='bx bx-hide eye-icon'></i>
-        </div>
-          <script>
-document.querySelectorAll('.eye-icon').forEach(function(icon) {
-    icon.addEventListener('click', function () {
-        const input = this.previousElementSibling;
-
-        if (input.type === "password") {
-            input.type = "text";
-            this.classList.remove("bx-hide");
-            this.classList.add("bx-show");
-        } else {
-            input.type = "password";
-            this.classList.remove("bx-show");
-            this.classList.add("bx-hide");
-        }
-    });
-});
-</script>
-
-                    
+    <div class="input-box">
+        <input type="password" placeholder="Password" required>
+        <i class='bx bx-hide eye-icon'></i>
+    </div>
+    <div class="input-box">
+        <input type="password" placeholder="Confirm Password" required>
+        <i class='bx bx-hide eye-icon'></i>
+    </div>
+    <script>
+        document.querySelectorAll('.eye-icon').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                const input = this.previousElementSibling;
+                if (input.type === "password") {
+                    input.type = "text";
+                    this.classList.remove("bx-hide");
+                    this.classList.add("bx-show");
+                } else {
+                    input.type = "password";
+                    this.classList.remove("bx-show");
+                    this.classList.add("bx-hide");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

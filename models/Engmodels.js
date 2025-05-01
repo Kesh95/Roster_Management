@@ -24,6 +24,7 @@ exports.findByOlmid = async (olmid) => {
 };
 exports.addleaveUser=async (user) =>{
   const {olmid,startdate,enddate,reason} = user;
+  console.log('Olmid of engineer who is applying for leave',olmid);
   const status = 'pending'; 
   const query = `
     INSERT INTO leavedata
