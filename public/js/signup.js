@@ -8,7 +8,17 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Form Data:", data);
             if (!data.username || !data.olmid || !data.contact_no || !data.gender || !data.lob || !data.team || !data.pass || !data.confirmpass) {
                 alert("All fields are required!");
-                return; 
+                return;
+            }
+            const contactRegex = /^\d{10}$/;
+            if (!contactRegex.test(data.contact_no)) {
+                alert("Contact number must be exactly 10 digits!");
+                return;
+            }
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(data.pass)) {
+                alert("Password must be at least 8 characters long and include a letter, a number, and a special character!");
+                return;
             }
             if (data.pass !== data.confirmpass) {
                 alert("Passwords don't match!");

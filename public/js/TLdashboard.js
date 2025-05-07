@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const resSession = await fetch('/tl/getLoggedInOlmId');
     const sessionData = await resSession.json();
-    // document.getElementById('navbarOlmid').innerText = sessionData.olmId;
-
     const olmId = sessionData.olmId;
     if (olmId) {
       console.log("Type of fetch:", typeof fetch);
@@ -63,7 +61,6 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     alert('Please enter an OLM ID to search.');
     return;
   }
-
   try {
     const response = await fetch(`/tl/search-user/${olmid}`);
     const data = await response.json();
@@ -76,15 +73,12 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
       document.getElementById('teamDropdown').value = users.team || '';
       document.getElementById('roledropdown').value = users.role || '';
       document.getElementById('modifypass').value = users.pass || '';
-
-
-
     } else {
       alert(data.message || 'User not found.');
     }
   } catch (error) {
     console.error('Error fetching user:', error);
-    alert('Something went wrong. Please try again.');
+    alert('Olmid is incorrect.');
   }
 });
 
@@ -146,16 +140,14 @@ document.getElementById('viewModal').addEventListener('show.bs.modal', async fun
   try {
     const response = await fetch('/tl/all-engineers');
     const engineers = await response.json();
-
     const tbody = document.querySelector('#viewModal tbody');
-    tbody.innerHTML = ''; // clear existing rows
-
+    tbody.innerHTML = '';
     engineers.forEach((eng, index) => {
       const row = `
           <tr>
             <th scope="row">${index + 1}</th>
             <td>${eng.olmid}</td>
-            <td>${eng.username}</td>
+            <td>${eng.username}</td>                                                                               
             <td>${eng.gender}</td>
             <td>${eng.contact_no}</td>
             <td>${eng.lob}</td>

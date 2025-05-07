@@ -41,23 +41,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 submitbtn.addEventListener('click', async function (e) {
     e.preventDefault();
-
-    // Get the form element
     const leaveForm = document.getElementById('leave-form');
     const formData = new FormData(leaveForm);
     const data = Object.fromEntries(formData);
     const resSession = await fetch('/eng/getLoggedInOlmId');
-
     const sessionData = await resSession.json();
     const olmId = sessionData.olmId;
     console.log("Form Data:", data); 
-
-    // Check if all fields are filled before continuing
     if (!data.startdate || !data.enddate || !data.reason) {
         alert("All fields are required!");
         return;
     }
-
     if (new Date(data.enddate) < new Date(data.startdate)) {
         alert("Error: End date cannot be before start date");
         return;
@@ -68,9 +62,7 @@ submitbtn.addEventListener('click', async function (e) {
         enddate: data.enddate,
         reason: data.reason,
     };
-
     console.log("Leave Data to Send:", leaveData);
-
     try {
         const response = await fetch(`/eng/leavedata`, {
             method: 'POST',
@@ -97,7 +89,7 @@ submitbtn.addEventListener('click', async function (e) {
         // Optionally reset the form
         leaveForm.reset();
 
-    } catch (error) {
+    }catch (error) {
         console.error("There was an error submitting the leave:", error);
         alert("An error occurred while submitting your leave. Please try again later.");
     }

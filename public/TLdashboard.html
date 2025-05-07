@@ -499,6 +499,69 @@
   });
 
 </script>
+<script>
+  lobDropdown = document.getElementById('lobDropdown');
+  teamDropdown = document.getElementById('teamDropdown');
+
+  var click=0;
+
+  btn = document.getElementById('lobbtn');
+  btn.addEventListener('click', function(){
+      teamDropdown.style.display='none';
+      lobDropdown.style.display='block';
+  })
+
+  const teams = {EGB: ["RF", "TAC-IP", "ESC", "Media"], GB:["IP", "RF", "IPLC", "Delight", "BT", "CC"],
+      ISP: ["ESC", "Data", "D&C", "CC"], SDWAN: ["TAC1", "TAC2"]
+  };
+
+  const teamul = document.getElementById('teamul');
+   
+  listitem = document.querySelectorAll('.list-item');
+  for(let i=0; i<listitem.length; i++){
+ 
+      listitem[i].addEventListener('click', function(){
+          click =1;
+          teambtn.value = "Select Team";
+          // btn.textContent = listitem[i].textContent;
+          btn.value = listitem[i].textContent;
+          // console.log(btn.value);
+          document.getElementById('lobDropdown').style.display='none';
+          document.getElementById("teamul").innerHTML="";
+          var btnvalue = btn.value;
+          // const teamul = document.getElementById('teamul');
+       
+          for(let j=0; j<teams[btnvalue].length; j++){
+              var b = document.createElement("li");
+              var att = document.createAttribute("class");
+              att.value = "teamitem";
+              b.setAttributeNode(att);
+              var val = document.createAttribute("value");
+              val.value = teams[btnvalue][j];
+              b.setAttributeNode(val);
+              var c = document.createTextNode(teams[btnvalue][j]);
+              b.appendChild(c);
+              teamul.appendChild(b);  
+          }
+      })}
+
+     
+      teambtn = document.getElementById('teambtn');
+      teambtn.addEventListener('click', function(){
+      lobDropdown.style.display='none';
+      if(click===1){
+      teamDropdown.style.display='block';}
+      teamitem = document.querySelectorAll('.teamitem');
+      for(let i=0; i<teamitem.length; i++){
+          teamitem[i].addEventListener('click', function(){
+          teambtn.value = teamitem[i].textContent;
+          document.getElementById('teamDropdown').style.display='none';
+      })}
+
+      })
+
+</script>
+
 </body>
 
 </html>
