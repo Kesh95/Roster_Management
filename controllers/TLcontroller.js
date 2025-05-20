@@ -16,6 +16,23 @@ exports.searchEngineerBytl = async (req, res) => {
   }
 };
 
+exports.updateEngineer = async (req, res) => {
+  const originalOlmId = req.params.olmid;
+  const updatedData = req.body;
+
+  try {
+    const result = await TLModel.updateEngineer(originalOlmId, updatedData);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Engineer not found.' });
+    }
+
+    res.status(200).json({ message: 'Engineer updated successfully.' });
+  } catch (error) {
+    console.error('Update error:', error);
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+};
 exports.setUserToResign = async (req, res) => {
   try {
     const { olmid } = req.params;

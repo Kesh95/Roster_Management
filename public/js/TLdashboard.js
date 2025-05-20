@@ -81,6 +81,68 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     alert('Olmid is incorrect.');
   }
 });
+document.getElementById('savedetail').addEventListener('click', async function (e) {
+  e.preventDefault();
+
+  const originalOlmId = document.getElementById('modifyolmsearch').value.trim();
+  // if (!originalOlmId) {
+  //   alert("Please enter a valid OLM ID to update.");
+  //   return;
+  // }
+
+  const updatedData = {
+    username: document.getElementById('modifyname').value.trim(),
+    olmid: document.getElementById('modifyolm').value.trim(),
+    gender: document.getElementById('modifygender').value,
+    contact_no: document.getElementById('modifycontact').value.trim(),
+    lob: document.getElementById('lobbtn').value.trim(),
+    team: document.getElementById('teambtn').value.trim(),
+    role: document.getElementById('roledropdown').value,
+    pass: document.getElementById('modifypass').value.trim()
+  };
+  for (const key in updatedData) {
+    if (!updatedData[key]) {
+      alert("Please fill all fields before saving.");
+      return;
+    }
+  }
+  if (updatedData.lob === 'Select LOB') {
+    alert("Please select a valid LOB.");
+    return;
+  }
+
+  if (updatedData.team === 'Select Team') {
+    alert("Please select a valid Team.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`/tl/update-user/${originalOlmId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedData)
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert('Engineer details updated successfully!');
+      const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+      modal.hide();
+      document.getElementById('searchForm').reset();
+      document.getElementById('lobbtn').value = 'Select LOB';
+      document.getElementById('teambtn').value = 'Select Team';
+      document.getElementById('modifyolmsearch').value = '';
+    } else {
+      alert(result.message || 'Update failed.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Something went wrong. Check details.');
+  }
+});
+
 
 document.getElementById('searchfordelete').addEventListener('click', async function (e) {
   e.preventDefault(); // Prevent form from reloading

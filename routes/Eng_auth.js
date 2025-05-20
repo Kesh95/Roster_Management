@@ -14,6 +14,6 @@ router.get('/getLoggedInOlmId', (req, res) => {
 
 
 router.get('/search-user/:olmid', EngController.fetchUser);
-router.post('/leavedata',EngController.leavedata);
+router.post('/leavedata', EngController.submitMultipleLeaves);
 
 module.exports = router;

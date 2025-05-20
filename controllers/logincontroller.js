@@ -2,14 +2,12 @@ const loginModel = require('../models/loginmodels');
 
 exports.login = async (req, res) => {
   const { olmid, pass } = req.body;
-
   console.log("Received OLM ID:", olmid);
   console.log("Received Password:", pass);
 
   if (!olmid || !pass) {
     return res.status(400).json({ message: 'Both OLM ID and password are required!' });
   }
-
   try {
     console.log("🔍 Looking up user for OLM ID:", olmid);
     const user = await loginModel.getUserByOlmId(olmid);
@@ -25,7 +23,7 @@ exports.login = async (req, res) => {
     if (user.role === 'TL') {
       req.session.olmid = user.olmid;
       return res.status(200).json({ redirect: '/TLdashboard' });
-    } else if (user.role === 'Eng') {
+    } else if (user.role === 'Eng' || user.role === 'Engineer') {
       req.session.olmid = user.olmid;
       return res.status(200).json({ redirect: '/EngDashboard' });
     } else {

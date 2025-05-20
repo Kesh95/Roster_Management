@@ -17,14 +17,28 @@ exports.fetchUser = async (req, res) => {
   }
 };
 
-exports.leavedata = async (req, res) => {
-  const {olmid,startdate, enddate,reason,status } = req.body;
+exports.submitMultipleLeaves = async (req, res) => {
+  const { olmId, leaveRequests } = req.body;
+
+  if (!olmId || !Array.isArray(leaveRequests) || leaveRequests.length === 0) {
+    return res.status(400).json({ message: 'Invalid request data.' });
+  }
 
   try {
-    const result = await EngModel.addleaveUser({olmid, startdate,enddate,reason,status });
-    res.status(200).json({ message: 'Data Saved successfully!' });
+    const values = leaveRequests.map(leave => [
+      olmId,
+      leave.start,
+      leave.end,
+      leave.reason,
+      'pending'
+    ]);
+
+    await EngModel.insertMultipleLeaves(values);
+    console.log("Leave entries inserted successfully");
+
+    res.status(200).json({ message: 'Leave requests submitted successfully.' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error Occured!' });
+    console.error("Error submitting leaves:", err);
+    res.status(500).json({ message: 'Server error while saving leaves.' });
   }
 };

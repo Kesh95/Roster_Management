@@ -18,6 +18,45 @@ exports.getUserByOlmIdforTl = async (olmid) => {
   }
 };
 
+exports.updateEngineer = (originalOlmId, data) => {
+  const {
+    username,
+    olmid,
+    gender,
+    contact_no,
+    lob,
+    team,
+    role,
+    pass
+  } = data;
+console.log(data);
+  const query = `
+    UPDATE signup 
+    SET username = ?, olmid = ?, gender = ?, contact_no = ?, lob = ?, team = ?, role = ?, pass = ?
+    WHERE olmid = ?
+  `;
+
+  const values = [
+    username,
+    olmid,
+    gender,
+    contact_no,
+    lob,
+    team,
+    role,
+    pass,
+    originalOlmId
+  ];
+
+  return new Promise((resolve, reject) => {
+    db.query(query, values, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+
 exports.updateUserStateToResign = async (olmid) => {
   try {
     const [results] = await db.execute('UPDATE signup SET state = ? WHERE olmid = ?', ['resign', olmid]);

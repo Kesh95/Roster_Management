@@ -22,22 +22,17 @@ exports.findByOlmid = async (olmid) => {
     throw err;
   }
 };
-exports.addleaveUser=async (user) =>{
-  const {olmid,startdate,enddate,reason} = user;
-  console.log('Olmid of engineer who is applying for leave',olmid);
-  const status = 'pending'; 
-  const query = `
-    INSERT INTO leavedata
-    (olmid,startdate,enddate,reason,status) 
-    VALUES (?, ?, ?, ?, ?)
-  `;
-  try {
-    const [result] = await db.execute(query, [
-      olmid,startdate,enddate,reason,status
-    ]);
-    return result;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+
+exports.insertMultipleLeaves = (values) => {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO leavedata (olmid, startdate, enddate, reason, status) VALUES ?`;
+    db.query(sql, [values], (err, result) => {
+      if (err) {
+        console.error("DB insert error:", err);
+        return reject(err);
+      }
+      console.log("Inserted leave data:", result);
+      resolve(result);
+    });
+  });
 };
